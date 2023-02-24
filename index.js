@@ -16,6 +16,8 @@ const responseTime = document.getElementById("response-time");
 const trueBtn = document.getElementById("true-btn");
 const wrongBtn = document.getElementById("wrong-btn");
 let color = document.getElementById("color");
+const answer = document.querySelectorAll(".answer");
+const result = document.getElementById("result");
 let randomColor = function () {
   let randomNumber = Math.floor(Math.random() * 10);
   return colors[randomNumber];
@@ -23,7 +25,7 @@ let randomColor = function () {
 let startGame;
 playBtn.addEventListener("click", () => {
   playBtn.disabled = true;
-  color.textContent = randomColor()
+  color.textContent = randomColor();
   setTimeout(() => {
     document.body.style.backgroundColor = randomColor();
   }, 3000);
@@ -45,14 +47,20 @@ playBtn.addEventListener("click", () => {
 function calculateResponseTime() {
   responseTime.textContent = Date.now() - startGame;
 }
-trueBtn.addEventListener("click", () => {
-  calculateResponseTime();
-  trueBtn.disabled = true;
-  wrongBtn.disabled = true;
-});
-wrongBtn.addEventListener("click", () => {
-  calculateResponseTime();
-  trueBtn.disabled = true;
-  wrongBtn.disabled = true;
-});
-console.log(Date.now());
+answer.forEach((btn) =>
+  btn.addEventListener("click", (e) => {
+    calculateResponseTime();
+    showResult(e.target);
+    trueBtn.disabled = true;
+    wrongBtn.disabled = true;
+  })
+);
+function rightAnswer() {
+  let bgColor = document.body.style.backgroundColor;
+  if (bgColor === color.textContent) return "True";
+  else return "Wrong";
+}
+function showResult(answerBtn) {
+  if (answerBtn.textContent === rightAnswer()) result.textContent = "Congrats, You're right!" 
+  else result.textContent = "Sadly...You're wrong."
+}

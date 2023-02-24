@@ -1,11 +1,7 @@
-body{
-  display: flex;
-  justify-content: center ;
-}
 #container {
   background-color: white;
   border: 5px solid black;
   width: fit-content;
   padding: 50px 100px;
-  margin: 5em;
+  margin: 5em auto;
 } 
