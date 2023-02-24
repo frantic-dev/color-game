@@ -15,6 +15,7 @@ const timer = document.getElementById("timer");
 const responseTime = document.getElementById("response-time");
 const trueBtn = document.getElementById("true-btn");
 const wrongBtn = document.getElementById("wrong-btn");
+let color = document.getElementById("color");
 let randomColor = function () {
   let randomNumber = Math.floor(Math.random() * 10);
   return colors[randomNumber];
@@ -22,6 +23,7 @@ let randomColor = function () {
 let startGame;
 playBtn.addEventListener("click", () => {
   playBtn.disabled = true;
+  color.textContent = randomColor()
   setTimeout(() => {
     document.body.style.backgroundColor = randomColor();
   }, 3000);
